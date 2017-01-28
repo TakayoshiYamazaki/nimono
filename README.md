@@ -1,6 +1,7 @@
 # nimono
 
-nimono is a interface to CaboCha for CRuby(mri/yarv) and JRuby(jvm).
+nimono is an interface of CaboCha for MRI Ruby and JRuby, and parsing Japanese
+sentences using the library.
 It depends on the CaboCha library so the library will have to install first.
 
 ## Requirements
@@ -10,7 +11,7 @@ nimono requires the following:
 - [CaboCha _0.69_](https://taku910.github.io/cabocha/)
 - [CaboCha](https://taku910.github.io/cabocha/) requires [CRF++](https://taku910.github.io/crfpp/), [MeCab](http://taku910.github.io/mecab/#download) and either of the following dictionaries.
 - mecab-ipadic, mecab-jumandic, unidic. For further information please refer to the [MeCab](http://taku910.github.io/mecab/#).
-- [FFI _1.9.0 or higher_](https://rubygems.org/gems/ffi)
+- [ffi _1.9.0 or higher_](https://rubygems.org/gems/ffi)
 
 ## Installation
 
@@ -29,6 +30,9 @@ Or install it yourself as:
     $ gem install nimono
 
 ## Usage
+
+Create an instance of Nimono::Cabocha and parse the sentence.
+By default, the result is outpeuuted by displaying Sumple Tree.
 
 ```ruby
 require 'nimono'
