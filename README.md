@@ -30,7 +30,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'nimono'
+
+nc = Nimono::Cabocha.new
+puts nc.parse('太郎は花子が読んでいる本を次郎に渡した')
+太郎は---------D
+  花子が-D     |
+    読んだ-D   |
+        本を---D
+        次郎に-D
+          渡した
+EOS
+```
 
 ## Development
 
