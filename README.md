@@ -15,17 +15,7 @@ nimono requires the following:
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'nimono'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it as:
 
     $ gem install nimono
 
@@ -48,15 +38,44 @@ puts nc.parse('太郎は花子が読んでいる本を次郎に渡した')
 EOS
 ```
 
-## Development
+```ruby
+require 'nimono'
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+nc = Nimono::Cabocha.new('-f1 -n1')
+nc.parse('太郎は花子が読んでいる本を次郎に渡した')
+nc.chunks.each_with_index do |chunk, i|
+  puts "* #{i} #{chunk.link}D #{chunk.head_pos}/#{chunk.func_pos} #{sprintf("%6f", chunk.score)}"
+  chunk.token_size.times do |i|
+    token = nc.tokens[chunk.token_pos + i]
+    puts "#{token.surface}\t#{token.feature}\t#{token.ne}"
+  end
+end
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+* 0 5D 0/1 -0.742128
+太郎	名詞,固有名詞,人名,名,*,*,太郎,タロウ,タロー	B-PERSON
+は	助詞,係助詞,*,*,*,*,は,ハ,ワ	O
+* 1 2D 0/1 1.700175
+花子	名詞,固有名詞,人名,名,*,*,花子,ハナコ,ハナコ	B-PERSON
+が	助詞,格助詞,一般,*,*,*,が,ガ,ガ	O
+* 2 3D 0/2 1.825021
+読ん	動詞,自立,*,*,五段・マ行,連用タ接続,読む,ヨン,ヨン	O
+で	助詞,接続助詞,*,*,*,*,で,デ,デ	O
+いる	動詞,非自立,*,*,一段,基本形,いる,イル,イル	O
+* 3 5D 0/1 -0.742128
+本	名詞,一般,*,*,*,*,本,ホン,ホン	O
+を	助詞,格助詞,一般,*,*,*,を,ヲ,ヲ	O
+* 4 5D 1/2 -0.742128
+次	名詞,一般,*,*,*,*,次,ツギ,ツギ	O
+郎	名詞,一般,*,*,*,*,郎,ロウ,ロー	O
+に	助詞,格助詞,一般,*,*,*,に,ニ,ニ	O
+* 5 -1D 0/1 0.000000
+渡し	動詞,自立,*,*,五段・サ行,連用形,渡す,ワタシ,ワタシ	O
+た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ	O
 
+```
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nimono. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/TakayoshiYamazaki/nimono. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
