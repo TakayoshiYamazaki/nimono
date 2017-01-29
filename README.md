@@ -37,7 +37,7 @@ puts nc.parse('太郎は花子が読んでいる本を次郎に渡した')
           渡した
 EOS
 ```
-
+Example of analyzing dependency:
 ```ruby
 require 'nimono'
 
