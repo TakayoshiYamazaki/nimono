@@ -41,14 +41,15 @@ Example of analyzing dependency:
 ```ruby
 require 'nimono'
 
-nc = Nimono::Cabocha.new('-f1 -n1')
+nc = Nimono::Cabocha.new('-n1')
 nc.parse('太郎は花子が読んでいる本を次郎に渡した')
-nc.chunks.each_with_index do |chunk, i|
-  puts "* #{i} #{chunk.link}D #{chunk.head_pos}/#{chunk.func_pos} #{sprintf("%6f", chunk.score)}"
-  chunk.token_size.times do |i|
-    token = nc.tokens[chunk.token_pos + i]
-    puts "#{token.surface}\t#{token.feature}\t#{token.ne}"
+nc.tokens.each do |t|
+  cid = 0
+  unless t.chunk.nil?
+    puts "* #{cid} #{t.chunk.link}D #{t.chunk.head_pos}/#{t.chunk.func_pos} #{'%6f' % t.chunk.score}"
+    cid += 1
   end
+  puts "#{t.surface}\t#{t.feature}\t#{t.ne}"
 end
 
 * 0 5D 0/1 -0.742128
