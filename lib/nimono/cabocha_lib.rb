@@ -70,7 +70,6 @@ module Nimono
     attach_function :cabocha_tree_size, [:pointer], :size_t
     attach_function :cabocha_tree_chunk_size, [:pointer], :size_t
     attach_function :cabocha_tree_token_size, [:pointer], :size_t
-    # attach_function :cabocha_tree_sentence, [:pointer], :string
     attach_function :cabocha_tree_token, [:pointer, :size_t], :pointer
     attach_function :cabocha_tree_chunk, [:pointer, :size_t], :pointer
     # attach_function :cabocha_tree_charset, [:pointer], :int
