@@ -25,15 +25,11 @@ describe Nimono::Cabocha do
 
   # ファイルからテキスト読み込み
   it '#parse from text file' do
-    nc = Nimono::Cabocha.new('-f1 -n1')
-    fname = '/home/yamazaki/work/nimono/spec/sports.data'
+    fname = './spec/sports.data'
     File.foreach(fname) do |line|
-      expect(nc.parse(line)).to eq ("* 0 1D 3/4 0.000000\n［\t記号,括弧開,*,*,*,*,［,［,［\tO\nスポーツ\t名詞,一般,*,*,*,*,スポーツ,スポーツ,スポーツ\tO\n］\t記号,括弧閉,*,*,*,*,］,］,］\tO\n私\t名詞,代名詞,一般,*,*,*,私,ワタシ,ワタシ\tO\nの\t助詞,連体化,*,*,*,*,の,ノ,ノ\tO\n* 1 -1D 0/0 0.000000\n生きがい\t名詞,一般,*,*,*,*,生きがい,イキガイ,イキガイ\tO\nEOS\n")
+      expect(@nc.parse(line)).to eq ("［スポーツ］私の-D\n          生きがい\nEOS\n")
     end
   end
-
-
-  #it '#parse with option --parser-model=FILE' do
 
   # modelファイル読み込み
   it '#parse with option --chunker-model=FILE' do
