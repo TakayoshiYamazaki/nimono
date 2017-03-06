@@ -1,4 +1,4 @@
-# nimono
+# nimono [![Gem Version](https://badge.fury.io/rb/nimono.svg)](https://badge.fury.io/rb/nimono)
 
 nimono is an interface of CaboCha for MRI Ruby and JRuby, and parsing Japanese
 sentences using the library.
