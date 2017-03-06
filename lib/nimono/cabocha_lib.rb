@@ -112,7 +112,7 @@ module Nimono
       #   Nimono::CabochaLib.cabocha_tree_new
       # end
 
-      # def cabocha_tree_destory(tptr)
+      # def cabocha_tree_destroy(tptr)
       #   Nimono::CabochaLib.cabocha_tree_destroy(tptr)
       # end
 
@@ -243,6 +243,16 @@ module Nimono
     attr_reader :additional_info
     attr_reader :chunk
 
+    attr_reader :pos
+    attr_reader :pos1
+    attr_reader :pos2
+    attr_reader :pos3
+    attr_reader :c_form
+    attr_reader :c_type
+    attr_reader :o_form
+    attr_reader :reading
+    attr_reader :pronunciation
+
     layout :surface, :string,
            :normalized_surface, :string,
            :feature, :string,
@@ -287,6 +297,19 @@ module Nimono
         end
       end
 
+      @pos           = @feature_list[0]
+      @pos1          = @feature_list[1]
+      @pos2          = @feature_list[2]
+      @pos3          = @feature_list[3]
+      @c_form        = @feature_list[4]
+      @c_type        = @feature_list[5]
+      @o_form        = @feature_list[6]
+      @reading       = @feature_list[7]
+      @pronunciation = @feature_list[8]
+    end
+
+    def to_s
+      @surface
     end
   end
 

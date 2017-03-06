@@ -37,7 +37,9 @@ puts nc.parse('太郎は花子が読んでいる本を次郎に渡した')
               渡した
 EOS
 ```
+
 Example of analyzing dependency:
+
 ```ruby
 require 'nimono'
 
@@ -74,6 +76,7 @@ end
 た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ	O
 
 ```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/TakayoshiYamazaki/nimono. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
