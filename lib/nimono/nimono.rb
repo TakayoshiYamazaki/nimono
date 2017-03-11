@@ -8,7 +8,7 @@ module Nimono
   # `Cabocha` is a class providing an interface to the CaboCha library.
   # In this class the arguments supported by CaboCha can be used in almost
   # the same way.
-  class Cabocha
+  class Cabocha < FFI::AutoPointer
     include Nimono::OptionParse
     include Nimono::CabochaLib
 
@@ -21,6 +21,10 @@ module Nimono
     # 
     # @return [Array] Array of Token
     attr_reader :tokens
+
+    def self.release(ptr)
+      self.class.cabocha_destroy(ptr)
+    end
 
     # Initializes the CaboCha with the given 'options'.
     # options is given as a string (CaboCha command line arguments) or
@@ -92,6 +96,8 @@ module Nimono
       @libpath = self.class.cabocha_library
 
       @parser = self.class.cabocha_new2(opt_str)
+      super @parser
+
       if @parser.address == 0x0
         raise CabochaError.new("Could not initialize CaboCha with options: '#{opt_str}'")
       end
@@ -130,12 +136,10 @@ module Nimono
         @tokens.freeze
 
         @chunks = []
-        self.class.cabocha_tree_chunk_size(@tree).times do |i|
-          @chunks << Nimono::Chunk.new(self.class.cabocha_tree_chunk(@tree, i))
-          # chunk = Nimono::Chunk.new(self.class.cabocha_tree_chunk(@tree, i))
-          # chunk.instance_variable_set(:@tokens, @tokens[chunk.token_pos..(chunk.token_pos + chunk.token_size - 1)])
-          # @chunks << chunk
+        @tokens.each do |token|
+          @chunks << token.chunk unless token.chunk.nil?
         end
+        
         @chunks.freeze
 
         self.to_s
