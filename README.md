@@ -45,13 +45,12 @@ require 'nimono'
 
 nc = Nimono::Cabocha.new('-n1')
 nc.parse('太郎は花子が読んでいる本を次郎に渡した')
-nc.tokens.each do |t|
-  cid = 0
-  unless t.chunk.nil?
-    puts "* #{cid} #{t.chunk.link}D #{t.chunk.head_pos}/#{t.chunk.func_pos} #{'%6f' % t.chunk.score}"
-    cid += 1
+
+nc.chunks.each_with_index do |chunk, cid|
+  puts "* #{cid} #{chunk.link}D #{chunk.head_pos}/#{chunk.func_pos} #{'%6f' % chunk.score}"
+  chunk.tokens.each do |token|
+    puts "#{token.surface}\t#{token.feature}\t#{token.ne}"
   end
-  puts "#{t.surface}\t#{t.feature}\t#{t.ne}"
 end
 
 * 0 5D 0/1 -0.742128
@@ -74,7 +73,6 @@ end
 * 5 -1D 0/1 0.000000
 渡し	動詞,自立,*,*,五段・サ行,連用形,渡す,ワタシ,ワタシ	O
 た	助動詞,*,*,*,特殊・タ,基本形,た,タ,タ	O
-
 ```
 
 ## Contributing
@@ -85,4 +83,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Takayo
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

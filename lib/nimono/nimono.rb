@@ -136,10 +136,14 @@ module Nimono
         @tokens.freeze
 
         @chunks = []
-        @tokens.each do |token|
-          @chunks << token.chunk unless token.chunk.nil?
+        @tokens.each {|token| @chunks << token.chunk unless token.chunk.nil?}
+        @chunks.each do |chunk|
+          tokens = []
+          chunk.token_size.times do |i|
+            tokens << @tokens[chunk.token_pos + i]
+          end
+          chunk.instance_variable_set(:@tokens, tokens)
         end
-        
         @chunks.freeze
 
         self.to_s
