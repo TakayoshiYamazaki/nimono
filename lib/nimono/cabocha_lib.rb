@@ -179,6 +179,7 @@ module Nimono
     # :features is a hash of elements of :feature_list separated by colons.
     attr_reader :features
     attr_reader :tokens
+    attr_reader :id
 
     layout :link, :int,
            :head_pos, :size_t,
@@ -230,6 +231,10 @@ module Nimono
           @features = Hash[*@feature_list.map {|f| f.split(':') }.flatten].freeze
         end
       end
+    end
+
+    def to_s
+      @to_s ||= tokens.map{|t| t.to_s}.join
     end
   end
 

@@ -46,8 +46,8 @@ require 'nimono'
 nc = Nimono::Cabocha.new('-n1')
 nc.parse('太郎は花子が読んでいる本を次郎に渡した')
 
-nc.chunks.each_with_index do |chunk, cid|
-  puts "* #{cid} #{chunk.link}D #{chunk.head_pos}/#{chunk.func_pos} #{'%6f' % chunk.score}"
+nc.chunks.each do |chunk|
+  puts "* #{chunk.id} #{chunk.link}D #{chunk.head_pos}/#{chunk.func_pos} #{'%6f' % chunk.score}"
   chunk.tokens.each do |token|
     puts "#{token.surface}\t#{token.feature}\t#{token.ne}"
   end

@@ -137,12 +137,13 @@ module Nimono
 
         @chunks = []
         @tokens.each {|token| @chunks << token.chunk unless token.chunk.nil?}
-        @chunks.each do |chunk|
+        @chunks.each_with_index do |chunk, index|
           tokens = []
           chunk.token_size.times do |i|
             tokens << @tokens[chunk.token_pos + i]
           end
           chunk.instance_variable_set(:@tokens, tokens)
+          chunk.instance_variable_set(:@id, index)
         end
         @chunks.freeze
 
